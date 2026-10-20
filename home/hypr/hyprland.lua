@@ -37,13 +37,14 @@ require("monitors")
 ---------------------
 
 -- Set programs that you use
-local terminal       = "kitty"
-local fileManager    = "thunar"
-local menu           = "wofi --show drun --style ~/.local/state/theme/wofi.css"
-local editor         = "kitty trcode"
-local browser        = "zen-beta"
-local notes          = "obsidian"
-local ai             = "claude-desktop"
+local terminal      = "kitty"
+local fileManager   = "thunar"
+local menu          = "wofi --show drun --style ~/.local/state/theme/wofi.css"
+local editor        = "kitty trcode"
+local browser       = "zen-beta"
+local notes         = "obsidian"
+local ai            = "claude-desktop"
+local copyHistory   = "~/.local/bin/cliphist-paste"
 
 -------------------
 ---- AUTOSTART ----
@@ -57,11 +58,13 @@ local ai             = "claude-desktop"
 local run_status_bar = "sol-shell"
 local run_hypr_agent = "systemctl --user start hyprpolkitagent"
 local start_file_portal = "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
+local add_cliphist_watcher = "wl-paste --watch cliphist store"
 
 hl.on("hyprland.start", function()
     hl.exec_cmd(run_status_bar)
     hl.exec_cmd(run_hypr_agent)
     hl.exec_cmd(start_file_portal)
+    hl.exec_cmd(add_cliphist_watcher)
 end)
 
 
@@ -107,7 +110,7 @@ hl.config({
         border_size      = 2,
 
         col              = {
-            active_border   = { colors = { "rgba(33ccffee)", "rgba(00ff99ee)" }, angle = 45 },
+            active_border   = "rgb(c7c896)", -- { colors = { "rgba(33ccffee)", "rgba(00ff99ee)" }, angle = 45 },
             inactive_border = "rgba(595959aa)",
         },
 
@@ -278,7 +281,7 @@ local closeWindowBind = hl.bind(mainMod .. " + C", hl.dsp.window.close())
 hl.bind(mainMod .. " + M",
     hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"))
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))
-hl.bind(mainMod .. " + V", hl.dsp.window.float({ action = "toggle" }))
+hl.bind(mainMod .. " + F", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod .. " + R", hl.dsp.exec_cmd(menu))
 hl.bind(mainMod .. " + N", hl.dsp.exec_cmd(notes))
 hl.bind(mainMod .. " + B", hl.dsp.exec_cmd(browser))
@@ -287,9 +290,13 @@ hl.bind(mainMod .. " + A", hl.dsp.exec_cmd(ai))
 hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit")) -- dwindle only
 
 -- screenshot
--- full screenshot
+--  full screenshot
 hl.bind(mainMod .. " + P", hl.dsp.exec_cmd("hyprshot -m output"))
 hl.bind(mainMod .. " + SHIFT + P", hl.dsp.exec_cmd("hyprshot -m region"))
+
+-- copy/paste
+--  copy history
+hl.bind(mainMod .. " + V", hl.dsp.exec_cmd(copyHistory))
 
 -- Move focus with mainMod + arrow keys
 hl.bind(mainMod .. " + left", hl.dsp.focus({ direction = "left" }))

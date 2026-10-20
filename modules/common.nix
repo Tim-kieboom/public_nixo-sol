@@ -101,19 +101,34 @@
 
 # --Packages--
   environment.systemPackages = with pkgs; [
-    vscode-json-languageserver
-    lua-language-server
-    nil
-    nixfmt
-    htop
-    btop
-    git
-    gh # github cli
-    opencode
-    python3
-    teams-for-linux
-    self.packages.${pkgs.stdenv.hostPlatform.system}.claude-desktop
-    inputs.terminal_code.packages.${pkgs.stdenv.hostPlatform.system}.default
+    
+    # Code
+    vscode-json-languageserver  # json language server
+    lua-language-server         # lua language server
+    nil                         # nix language server
+    nixfmt                      # nix formatter
+    lld                         # linker
+    python3                     # python
+
+    # version control
+    git 
+    gh                          # github cli
+    
+    # ai
+    opencode                    # ai agent coder tui
+    self.packages.${pkgs.stdenv.hostPlatform.system}.claude-desktop # ai app claude desktop 
+     
+    
+    # hardware displayer
+    htop                        # task manager
+    btop                        # gpu displayer
+    
+    # other apps 
+    wl-clipboard                # clipboard (used in cliphist for copy history)
+    wtype                       # keyboard simulator (used for copy history)
+    teams-for-linux             # teams
+    inputs.terminal_code.packages.${pkgs.stdenv.hostPlatform.system}.default  # trcode terminal ide
+    
   ];
 
   programs.nix-ld = {

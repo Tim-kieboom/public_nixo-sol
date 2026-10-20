@@ -25,6 +25,8 @@
     spotify
     # note/documentation
     obsidian
+    # clipboard history
+    pkgs.cliphist
 
     # --Games--
     # minecraft
@@ -38,12 +40,8 @@
     gcc                     # c compiler/linker
 
     # rust
-    cargo                   # rust package manager
-    rustc                   # rust compiler
-    rustfmt                 # rust formatter
-    clippy                  # rust linter
+    rustup                  # rust tools
     pkg-config              # how crates find lib
-    rust-analyzer           # rust server
 
     # --Hyperland--
     hyprsunset              # Night light
@@ -52,6 +50,17 @@
     wofi                    # app launcher
     pavucontrol             # audio of status bar
   ];
+
+  # clipboard history
+  services.cliphist = {
+    enable = true;
+    systemdTargets = ["config.wayland.systemd.target"];
+    extraOptions = [
+      "-max-dedupe-search" "10"
+      "-max-items" "500"
+    ];
+    allowImages = true;
+  };
 
   # statusbar
   sol-shell.enable = true;
