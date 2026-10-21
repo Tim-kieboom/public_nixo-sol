@@ -4,6 +4,9 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
 
+    # spotify custom theme's
+    spicetify-nix.url = "github:Gerg-L/spicetify-nix";
+
     # terminal ide
     terminal_code.url = "github:Tim-kieboom/TerminalCode";
 

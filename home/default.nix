@@ -1,9 +1,12 @@
 { pkgs, inputs, vars, hostName, ... }:
-
+let 
+    spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.system};
+in
 {
   imports = [
     inputs.sol-shell.nixosModules.default
     inputs.zen-browser.homeModules.default
+    inputs.spicetify-nix.homeManagerModules.default
   ];
 
   # Do NOT change this value 
@@ -21,8 +24,6 @@
     imv
     # png->jpg converter
     imagemagick
-    # music
-    spotify
     # note/documentation
     obsidian
     # clipboard history
@@ -50,6 +51,13 @@
     wofi                    # app launcher
     pavucontrol             # audio of status bar
   ];
+
+  # spotify custom theme's
+  programs.spicetify = {
+    enable = true;
+    theme = spicePkgs.themes.text;
+    colorScheme = "Spotify"; 
+  };
 
   # clipboard history
   services.cliphist = {
