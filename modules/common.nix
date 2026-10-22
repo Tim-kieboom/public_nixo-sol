@@ -116,7 +116,7 @@
     
     # ai
     opencode                    # ai agent coder tui
-    self.packages.${pkgs.stdenv.hostPlatform.system}.claude-desktop # ai app claude desktop 
+    inputs.llm-agents.packages.${pkgs.system}.claude-desktop # ai app claude desktop 
      
     
     # hardware displayer

@@ -14,10 +14,11 @@
     sol-shell.url = "github:Tim-kieboom/sol-shell";
 
     # ai
-    claude-desktop = {
-      url = "github:aaddrick/claude-desktop-debian";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    llm-agents.url = "github:numtide/llm-agents.nix";
+    #claude-desktop = {
+    #  url = "github:aaddrick/claude-desktop-debian";
+    #  inputs.nixpkgs.follows = "nixpkgs";
+    #};
 
     # browser
     zen-browser = {
@@ -31,7 +32,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, claude-desktop, ... } @ inputs:
+  outputs = { self, nixpkgs, home-manager, ... } @ inputs:
     let
       vars = import ./vars.nix;
 
@@ -57,9 +58,6 @@
         ];
       };
     in {
-      packages.x86_64-linux.claude-desktop =
-        claude-desktop.packages.x86_64-linux.claude-desktop;
-
       nixosConfigurations = {
         nixos = mkHost "nixos";
       };
