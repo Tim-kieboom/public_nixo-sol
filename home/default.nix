@@ -28,6 +28,8 @@ in
     obsidian
     # clipboard history
     pkgs.cliphist
+    # media player
+    playerctl
 
     # --Games--
     # minecraft
@@ -42,6 +44,7 @@ in
 
     # rust
     rustup                  # rust tools
+    cargo-nextest           # rust better test extenstion
     pkg-config              # how crates find lib
 
     # --Hyperland--

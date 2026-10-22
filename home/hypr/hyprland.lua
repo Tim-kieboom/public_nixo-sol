@@ -43,6 +43,7 @@ local menu          = "wofi --show drun --style ~/.local/state/theme/wofi.css"
 local editor        = "kitty trcode"
 local browser       = "zen-beta"
 local notes         = "obsidian"
+local music         = "spotify"
 local ai            = "claude-desktop"
 local copyHistory   = "~/.local/bin/cliphist-paste"
 
@@ -289,6 +290,15 @@ hl.bind(mainMod .. " + Z", hl.dsp.exec_cmd(editor))
 hl.bind(mainMod .. " + A", hl.dsp.exec_cmd(ai))
 hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit")) -- dwindle only
 
+-- music
+local musicPlayer = "playerctl --player=" .. music
+hl.bind(mainMod .. " + S", hl.dsp.exec_cmd(music))
+hl.bind(mainMod .. " + minus", hl.dsp.exec_cmd(musicPlayer .. " previous"))
+hl.bind(mainMod .. " + equal", hl.dsp.exec_cmd(musicPlayer .. " next"))
+hl.bind(mainMod .. " + bracketleft", hl.dsp.exec_cmd(musicPlayer .. " play"))
+hl.bind(mainMod .. " + bracketright", hl.dsp.exec_cmd(musicPlayer .. " stop"))
+
+
 -- screenshot
 --  full screenshot
 hl.bind(mainMod .. " + P", hl.dsp.exec_cmd("hyprshot -m output"))
@@ -330,8 +340,8 @@ for i = 1, 10 do
 end
 
 -- Example special workspace (scratchpad)
-hl.bind(mainMod .. " + S", hl.dsp.workspace.toggle_special("magic"))
-hl.bind(mainMod .. " + SHIFT + S", hl.dsp.window.move({ workspace = "special:magic" }))
+-- hl.bind(mainMod .. " + S", hl.dsp.workspace.toggle_special("magic"))
+-- hl.bind(mainMod .. " + SHIFT + S", hl.dsp.window.move({ workspace = "special:magic" }))
 
 -- Scroll through existing workspaces with mainMod + scroll
 hl.bind(mainMod .. " + mouse_down", hl.dsp.focus({ workspace = "e+1" }))
