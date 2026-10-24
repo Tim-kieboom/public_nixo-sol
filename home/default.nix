@@ -30,6 +30,8 @@ in
     pkgs.cliphist
     # media player
     playerctl
+    # mp4 watcher
+    vlc
 
     # --Games--
     # minecraft
@@ -43,6 +45,7 @@ in
     gcc                     # c compiler/linker
 
     # rust
+    lldb                    # debugger
     rustup                  # rust tools
     cargo-nextest           # rust better test extenstion
     pkg-config              # how crates find lib
@@ -54,6 +57,9 @@ in
     wofi                    # app launcher
     pavucontrol             # audio of status bar
   ];
+
+  # screen recorder
+  programs.obs-studio.enable = true;
 
   # spotify custom theme's
   programs.spicetify = {
