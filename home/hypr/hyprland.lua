@@ -40,7 +40,7 @@ require("monitors")
 local terminal      = "kitty"
 local fileManager   = "thunar"
 local menu          = "wofi --show drun --style ~/.local/state/theme/wofi.css"
-local editor        = "kitty trcode"
+local editor        = "kitty trcode -r"
 local browser       = "zen-beta"
 local notes         = "obsidian"
 local music         = "spotify"
