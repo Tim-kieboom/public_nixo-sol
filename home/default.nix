@@ -32,6 +32,8 @@ in
     playerctl
     # mp4 watcher
     vlc
+    # document writer
+    libreoffice
 
     # --Games--
     # minecraft
