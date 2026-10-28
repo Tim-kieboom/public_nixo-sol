@@ -34,6 +34,8 @@ in
     vlc
     # document writer
     libreoffice
+    # free fusion
+    inputs.solidcraft.packages.${pkgs.system}.solidcraft
 
     # --Games--
     # minecraft
@@ -42,6 +44,7 @@ in
     })
 
     # --Programming--
+    zed-editor              # ide
     
     # C
     gcc                     # c compiler/linker

@@ -1,9 +1,8 @@
 -- Monitor layout of the "nixos" host (loaded by hyprland.lua).
 -- Find your outputs with `hyprctl monitors`.
 
-local mainMonitor = "HDMI-A-2"
-local secondMonitor = "HDMI-A-3"
-
+local mainMonitor = "HDMI-A-4"
+local secondMonitor = "HDMI-A-5"
 hl.monitor({
     output   = mainMonitor,
     mode     = "preferred",

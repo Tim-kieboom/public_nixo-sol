@@ -4,6 +4,9 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
 
+    # free fusion
+    solidcraft.url = "github:bherbruck/solidcraft";
+
     # spotify custom theme's
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
 
