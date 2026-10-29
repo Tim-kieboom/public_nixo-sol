@@ -100,6 +100,8 @@
   nixpkgs.config.allowUnfree = true;
 
 # --Packages--
+  services.flatpak.enable = true;
+
   environment.systemPackages = with pkgs; [
     
     # Code
@@ -143,7 +145,6 @@
   };
 
   programs.yazi.enable = true;
-
 # --Unordered--
 
   # max number of configs displayed in systemd-boot menu

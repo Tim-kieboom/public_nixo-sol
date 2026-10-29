@@ -46,6 +46,7 @@ local notes         = "obsidian"
 local music         = "spotify"
 local ai            = "claude-desktop"
 local copyHistory   = "~/.local/bin/cliphist-paste"
+local TTS           = "flatpak run net.mkiol.SpeechNote"
 
 -------------------
 ---- AUTOSTART ----
@@ -307,6 +308,9 @@ hl.bind(mainMod .. " + SHIFT + P", hl.dsp.exec_cmd("hyprshot -m region"))
 -- copy/paste
 --  copy history
 hl.bind(mainMod .. " + V", hl.dsp.exec_cmd(copyHistory))
+
+-- tts 
+hl.bind(mainMod .. " + T", hl.dsp.exec_cmd(TTS))
 
 -- Move focus with mainMod + arrow keys
 hl.bind(mainMod .. " + left", hl.dsp.focus({ direction = "left" }))
