@@ -66,6 +66,11 @@ in
   # screen recorder
   programs.obs-studio.enable = true;
 
+  programs.direnv = {
+    enable = true;
+    nix-direnv.enable = true;
+  };
+
   # spotify custom theme's
   programs.spicetify = {
     enable = true;
