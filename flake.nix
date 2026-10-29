@@ -5,7 +5,7 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
 
     # free fusion
-    solidcraft.url = "github:bherbruck/solidcraft";
+    # solidcraft.url = "github:bherbruck/solidcraft";
 
     # spotify custom theme's
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
@@ -18,10 +18,6 @@
 
     # ai
     llm-agents.url = "github:numtide/llm-agents.nix";
-    #claude-desktop = {
-    #  url = "github:aaddrick/claude-desktop-debian";
-    #  inputs.nixpkgs.follows = "nixpkgs";
-    #};
 
     # browser
     zen-browser = {

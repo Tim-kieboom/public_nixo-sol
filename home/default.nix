@@ -35,7 +35,7 @@ in
     # document writer
     libreoffice
     # free fusion
-    inputs.solidcraft.packages.${pkgs.system}.solidcraft
+    # inputs.solidcraft.packages.${pkgs.system}.solidcraft
 
     # --Games--
     # minecraft
