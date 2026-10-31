@@ -2,13 +2,39 @@
 #
 # Setup on the laptop (see README): generate hardware-configuration.nix next to this
 # file, check the TODOs below, then enable the `laptop` line in flake.nix.
-{ ... }:
+{ lib, ... }:
 
 {
   imports = [
-    ./hardware-configuration.nix    # TODO: nixos-generate-config --show-hardware-config > hosts/laptop/hardware-configuration.nix
+    ./hardware-configuration.nix
     ../../modules/nvidia.nix
+    ./windows-mounts.nix
   ];
+
+# -- Boot -- 
+  # max number of configs displayed in systemd-boot menu
+  boot.loader.systemd-boot.configurationLimit = 10;
+
+  # Use the systemd-boot EFI boot loader.
+  boot.loader.systemd-boot.enable = lib.mkForce false;
+  boot.loader.grub = {
+    enable = true;
+    efiSupport = true;
+    device = "nodev";
+    useOSProber = true;   # finds Windows
+    configurationLimit = 10;
+    extraEntries = ''
+      menuentry "Windows" {
+        insmod part-gpt
+        insmod fat
+        insmod chain
+        search --fs-uuid --no-floppy --set=root FAB7-0D29
+        chainloader /EFI/Microsoft/Boot/bootmgfw.efi
+      }
+    '';
+  };
+  
+  boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = "laptop";
 
