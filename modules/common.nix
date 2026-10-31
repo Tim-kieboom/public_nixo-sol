@@ -1,11 +1,26 @@
 # Settings every machine gets. Machine-specific things live in hosts/<name>/ and the
 # optional modules (nvidia, gaming, dev-services, ai) that a host imports.
-{ config, pkgs, self, inputs, vars, ... }:
+{ pkgs, inputs, vars, lib, ... }:
 
 {
   imports = [
     inputs.sol-shell.nixosModules.greeter
   ];
+
+# -- Boot -- 
+  # max number of configs displayed in systemd-boot menu
+  boot.loader.systemd-boot.configurationLimit = 10;
+
+  # Use the systemd-boot EFI boot loader.
+  boot.loader.systemd-boot.enable = lib.mkForce false;
+  boot.loader.grub = {
+    enable = true;
+    efiSupport = true;
+    device = "nodev";
+    useOSProber = true;   # finds Windows
+  };
+  
+  boot.loader.efi.canTouchEfiVariables = true;
 
 # --Desktop--
   # -fileManager-
@@ -105,6 +120,7 @@
   environment.systemPackages = with pkgs; [
     
     # Code
+    typescript-language-server  # ts language server
     vscode-json-languageserver  # json language server
     lua-language-server         # lua language server
     nil                         # nix language server
@@ -147,9 +163,6 @@
   programs.yazi.enable = true;
 # --Unordered--
 
-  # max number of configs displayed in systemd-boot menu
-  boot.loader.systemd-boot.configurationLimit = 10;
-
   # optimize nix store
   nix.optimise.automatic = true;
 
@@ -176,10 +189,6 @@
       };
     };
   };
-
-  # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
 
   # Enable networking
   networking.networkmanager.enable = true;

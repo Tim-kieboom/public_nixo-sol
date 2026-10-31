@@ -50,8 +50,9 @@ in
     gcc                     # c compiler/linker
 
     # rust
+    cargo
     lldb                    # debugger
-    rustup                  # rust tools
+    # rustup                  # rust tools
     cargo-nextest           # rust better test extenstion
     pkg-config              # how crates find lib
 
