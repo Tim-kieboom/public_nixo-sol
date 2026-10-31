@@ -1,5 +1,5 @@
 # Desktop machine: AMD CPU, NVIDIA GPU, dual boot with Windows.
-{ lib, ... }:
+{ lib, vars, ... }:
 
 {
   imports = [

@@ -25,7 +25,7 @@
     configurationLimit = 10;
     extraEntries = ''
       menuentry "Windows" {
-        insmod part-gpt
+        insmod part_gpt
         insmod fat
         insmod chain
         search --fs-uuid --no-floppy --set=root FAB7-0D29
