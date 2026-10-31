@@ -21,7 +21,7 @@
     enable = true;
     efiSupport = true;
     device = "nodev";
-    useOSProber = true;   # finds Windows
+    useOSProber = false;
     configurationLimit = 10;
     extraEntries = ''
       menuentry "Windows" {
@@ -34,7 +34,8 @@
     '';
   };
   
-  boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader.grub.efiInstallAsRemovable = true;
+  boot.loader.efi.canTouchEfiVariables = false;
 
   networking.hostName = "laptop";
 
