@@ -14,6 +14,17 @@ if [ "$(git rev-parse --show-toplevel)" != "$(pwd -P)" ]; then
   exit 1
 fi
 
+echo "fetching ..."
+git fetch origin main
+
+read -r ahead behind < <(git rev-list --left-right --count HEAD...origin/main)
+if [ "$behind" -gt 0 ]; then
+  echo "local branch is behind; pulling ..."
+  git pull --rebase origin main
+else
+  echo "local branch is up to date (or ahead); skipping pull"
+fi
+
 echo "pushing ..."
 git add -A
 git commit -m "$1"
