@@ -59,6 +59,7 @@
     in {
       nixosConfigurations = {
         nixos = mkHost "nixos";
+        laptop = mkHost "laptop";
       };
     };
 }

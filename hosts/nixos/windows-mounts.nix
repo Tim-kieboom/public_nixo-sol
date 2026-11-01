@@ -7,11 +7,11 @@ let
     fsType = "ntfs3";
     options = [
       "rw"
-      "nofail"                          # don't block boot if its unavailable
+      "nofail"                              # don't block boot if its unavailable
       "uid=${toString vars.uid}" "gid=100"  # make files owned by the user
-      "windows_names"                   # avoid names Windows can't handle
-      "umask=022"                       # give write access
-      "x-systemd.automount"             # mount on first access
+      "windows_names"                       # avoid names Windows can't handle
+      "umask=022"                           # give write access
+      "x-systemd.automount"                 # mount on first access
     ];
   };
 in
