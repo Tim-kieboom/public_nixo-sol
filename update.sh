@@ -1,10 +1,9 @@
 #!/usr/bin/env bash
-# Usage: ./update.sh [host] [flake-input]
+# Usage: ./update.sh [flake-input]
 # Example: ./update.sh my-host nixpkgs
 set -e
 
-host="${1:-$(hostname)}"
-input="${2:-}"
+input="${1:-}"
 
 echo "Updating Nix flake inputs..."
 if [[ -n "$input" ]]; then
@@ -13,4 +12,4 @@ else
   sudo nix flake update
 fi
 
-./rebuild.sh "$host"
+./rebuild.sh 
