@@ -34,6 +34,8 @@ in
     vlc
     # document writer
     libreoffice
+    # notes
+    notepad-next           
     # free fusion
     # inputs.solidcraft.packages.${pkgs.system}.solidcraft
 
