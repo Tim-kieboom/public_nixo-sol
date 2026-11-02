@@ -31,32 +31,48 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, ... } @ inputs:
+  outputs =
+    {
+      self,
+      nixpkgs,
+      home-manager,
+      ...
+    }@inputs:
     let
       vars = import ./vars.nix;
 
       # Build one machine from hosts/<hostName>/default.nix.
       # To add a computer: copy hosts/nixos, run `nixos-generate-config` there,
       # and add a line to `nixosConfigurations` below.
-      mkHost = hostName: nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = { inherit self inputs vars hostName; };
-        modules = [
-          ./modules/common.nix
-          ./hosts/${hostName}
-          home-manager.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;     # reuse system nixpkgs (keeps allowUnfree)
-            home-manager.useUserPackages = true;
-            home-manager.extraSpecialArgs = { inherit inputs vars hostName; };
-            home-manager.backupFileExtension = "backup";
-            home-manager.users.${vars.username} = {
-              imports = [ ./home ];
-            };
-          }
-        ];
-      };
-    in {
+      mkHost =
+        hostName:
+        nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          specialArgs = {
+            inherit
+              self
+              inputs
+              vars
+              hostName
+              ;
+          };
+          modules = [
+            ./modules/common.nix
+            ./hosts/${hostName}
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true; # reuse system nixpkgs (keeps allowUnfree)
+              home-manager.useUserPackages = true;
+              home-manager.extraSpecialArgs = { inherit inputs vars hostName; };
+              home-manager.backupFileExtension = "backup";
+              home-manager.users.${vars.username} = {
+                imports = [ ./home ];
+              };
+            }
+          ];
+        };
+    in
+    {
       nixosConfigurations = {
         nixos = mkHost "nixos";
         laptop = mkHost "laptop";

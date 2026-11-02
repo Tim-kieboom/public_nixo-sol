@@ -1,13 +1,19 @@
 # Settings every machine gets. Machine-specific things live in hosts/<name>/ and the
 # optional modules (nvidia, gaming, dev-services, ai) that a host imports.
-{ pkgs, inputs, vars, lib, ... }:
+{
+  pkgs,
+  inputs,
+  vars,
+  lib,
+  ...
+}:
 
 {
   imports = [
     inputs.sol-shell.nixosModules.greeter
   ];
 
-# --Desktop--
+  # --Desktop--
   # -fileManager-
   programs.thunar = {
     enable = true;
@@ -44,28 +50,31 @@
     xkb = {
       layout = "us";
       variant = "";
-   };
+    };
   };
 
-# --Files--
+  # --Files--
   security.polkit.enable = true;
 
   # lets file manager mount drives
   services.udisks2.enable = true;
 
   # folder location for lock screen of sol-shell
-  security.pam.services.sol-shell = {};
+  security.pam.services.sol-shell = { };
 
   xdg.portal = {
     enable = true;
-    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];   # provides the FileChooser
+    extraPortals = [ pkgs.xdg-desktop-portal-gtk ]; # provides the FileChooser
     config = {
       common.default = [ "gtk" ];
-      hyprland.default = [ "hyprland" "gtk" ];
+      hyprland.default = [
+        "hyprland"
+        "gtk"
+      ];
     };
   };
 
-# --Passwords--
+  # --Passwords--
   # -Keyring-
   services.gnome.gnome-keyring.enable = true;
   programs.seahorse.enable = true;
@@ -73,14 +82,14 @@
   # enable PAM unlocking for the display manager
   security.pam.services.login.enableGnomeKeyring = true;
 
-# --BlueTooth--
+  # --BlueTooth--
   hardware.bluetooth = {
     enable = true;
     powerOnBoot = false;
   };
   services.blueman.enable = true;
 
-# --Graphics--
+  # --Graphics--
   hardware.graphics = {
     enable = true;
     enable32Bit = true; # required for playing most steam games
@@ -92,45 +101,46 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
-# --Packages--
+  # --Packages--
   services.flatpak.enable = true;
 
   environment.systemPackages = with pkgs; [
-    
+
     # Code
-    typescript-language-server  # ts language server
-    vscode-json-languageserver  # json language server
-    lua-language-server         # lua language server
-    nil                         # nix language server
-    nixfmt                      # nix formatter
-    lld                         # linker
-    python3                     # python
+    # language servers
+    vscode-langservers-extracted # html/css/json
+    typescript-language-server # ts
+    lua-language-server # lua
+    nil # nix
+
+    nixfmt # nix formatter
+    lld # linker
+    python3 # python
 
     # version control
-    git 
-    gh                          # github cli
-    
+    git
+    gh # github cli
+
     # ai
-    opencode                    # ai agent coder tui
-    inputs.llm-agents.packages.${pkgs.system}.claude-desktop # ai app claude desktop 
-     
-    
+    opencode # ai agent coder tui
+    inputs.llm-agents.packages.${pkgs.system}.claude-desktop # ai app claude desktop
+
     # hardware displayer
-    htop                        # task manager
-    btop                        # gpu displayer
-    
-    # other apps 
-    wl-clipboard                # clipboard (used in cliphist for copy history)
-    wtype                       # keyboard simulator (used for copy history)
-    teams-for-linux             # teams
-    inputs.terminal_code.packages.${pkgs.stdenv.hostPlatform.system}.default  # trcode terminal ide
-    
+    htop # task manager
+    btop # gpu displayer
+
+    # other apps
+    wl-clipboard # clipboard (used in cliphist for copy history)
+    wtype # keyboard simulator (used for copy history)
+    teams-for-linux # teams
+    inputs.terminal_code.packages.${pkgs.stdenv.hostPlatform.system}.default # trcode terminal ide
+
   ];
 
   programs.nix-ld = {
     enable = true;
     libraries = with pkgs; [
-      stdenv.cc.cc.lib   # libstdc++
+      stdenv.cc.cc.lib # libstdc++
       zlib
       openssl
       curl
@@ -139,7 +149,7 @@
   };
 
   programs.yazi.enable = true;
-# --Unordered--
+  # --Unordered--
 
   # optimize nix store
   nix.optimise.automatic = true;
@@ -152,7 +162,10 @@
   };
 
   # enable flakes
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
   # terminal editor settings
   programs.neovim = {
@@ -207,7 +220,10 @@
     # pin down uid so ntfs mounts always work
     uid = vars.uid;
     description = vars.fullName;
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+    ];
     home = "/home/${vars.username}";
   };
 }
