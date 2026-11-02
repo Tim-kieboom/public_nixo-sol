@@ -1,6 +1,12 @@
-{ pkgs, inputs, vars, hostName, ... }:
-let 
-    spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.system};
+{
+  pkgs,
+  inputs,
+  vars,
+  hostName,
+  ...
+}:
+let
+  spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.system};
 in
 {
   imports = [
@@ -9,15 +15,17 @@ in
     inputs.spicetify-nix.homeManagerModules.default
   ];
 
-  # Do NOT change this value 
-  # unless you have manually inspected 
+  # Do NOT change this value
+  # unless you have manually inspected
   # all the changes it would make to your configuration,
   # and migrated your data accordingly.
   home.stateVersion = "26.05";
 
   home.packages = with pkgs; [
     # password manager
-    keepassxc                  
+    keepassxc
+    # zip compresser
+    zip
     # zip decompresser
     unzip
     # image viewer
@@ -35,7 +43,7 @@ in
     # document writer
     libreoffice
     # notes
-    notepad-next           
+    notepad-next
     # free fusion
     # inputs.solidcraft.packages.${pkgs.system}.solidcraft
 
@@ -46,24 +54,24 @@ in
     })
 
     # --Programming--
-    zed-editor              # ide
-    
+    zed-editor # ide
+
     # C
-    gcc                     # c compiler/linker
+    gcc # c compiler/linker
 
     # rust
     cargo
-    lldb                    # debugger
+    lldb # debugger
     # rustup                  # rust tools
-    cargo-nextest           # rust better test extenstion
-    pkg-config              # how crates find lib
+    cargo-nextest # rust better test extenstion
+    pkg-config # how crates find lib
 
     # --Hyperland--
-    hyprsunset              # Night light
-    hyprpicker              # colorPicker
-    hyprshot                # for making screenshots
-    wofi                    # app launcher
-    pavucontrol             # audio of status bar
+    hyprsunset # Night light
+    hyprpicker # colorPicker
+    hyprshot # for making screenshots
+    wofi # app launcher
+    pavucontrol # audio of status bar
   ];
 
   # screen recorder
@@ -78,16 +86,18 @@ in
   programs.spicetify = {
     enable = true;
     theme = spicePkgs.themes.text;
-    colorScheme = "Spotify"; 
+    colorScheme = "Spotify";
   };
 
   # clipboard history
   services.cliphist = {
     enable = true;
-    systemdTargets = ["config.wayland.systemd.target"];
+    systemdTargets = [ "config.wayland.systemd.target" ];
     extraOptions = [
-      "-max-dedupe-search" "10"
-      "-max-items" "500"
+      "-max-dedupe-search"
+      "10"
+      "-max-items"
+      "500"
     ];
     allowImages = true;
   };
@@ -153,7 +163,7 @@ in
       cursor = "#d1c88f";
       font_family = "Noto Sans";
     };
-  };   
+  };
 
   # fastfetch
   programs.fastfetch = {
@@ -162,7 +172,9 @@ in
       logo = {
         type = "file";
         source = ./fastfetchLogo.txt;
-        color = { "1" = "38;2;255;209;102"; }; # gold
+        color = {
+          "1" = "38;2;255;209;102";
+        }; # gold
         padding.right = 2;
       };
       display = {
