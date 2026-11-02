@@ -279,11 +279,11 @@
         "nixpkgs": "nixpkgs_5"
       },
       "locked": {
-        "lastModified": 1793552078,
-        "narHash": "sha256-EOg7i29JuNOfGkHZiK9rd1xBLWCZITymWlRW1pbKfPU=",
+        "lastModified": 1793634527,
+        "narHash": "sha256-fvCaKDow8ySjVx3mf8i52gAHLfqzRa5+HHLYZ/+0Rro=",
         "owner": "Tim-kieboom",
         "repo": "TerminalCode",
-        "rev": "37e0298eb74e42ec425e7bac8ac42d66deb360dd",
+        "rev": "e95189c5d8108fe55fda333c4b2ef4cf79f7a5a7",
         "type": "github"
       },
       "original": {
