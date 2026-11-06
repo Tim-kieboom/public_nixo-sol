@@ -48,6 +48,8 @@ in
     notepad-next
     # md viewer/editor
     marktext
+    # disk usage viewer
+    pkgs.kdePackages.filelight
     # free fusion
     # inputs.solidcraft.packages.${pkgs.system}.solidcraft
 
