@@ -28,6 +28,8 @@ in
     zip
     # zip decompresser
     unzip
+    # rar decompresser
+    unar
     # image viewer
     imv
     # png->jpg converter
@@ -44,6 +46,8 @@ in
     libreoffice
     # notes
     notepad-next
+    # md viewer/editor
+    marktext
     # free fusion
     # inputs.solidcraft.packages.${pkgs.system}.solidcraft
 
