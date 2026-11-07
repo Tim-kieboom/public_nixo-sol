@@ -105,6 +105,8 @@
   services.flatpak.enable = true;
 
   environment.systemPackages = with pkgs; [
+    # partition tool
+    gparted
 
     # Code
     # language servers
