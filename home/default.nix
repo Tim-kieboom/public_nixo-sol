@@ -52,6 +52,8 @@ in
     pkgs.kdePackages.filelight
     # free fusion
     # inputs.solidcraft.packages.${pkgs.system}.solidcraft
+    # partition tool
+    gparted
 
     # --Games--
     # minecraft
