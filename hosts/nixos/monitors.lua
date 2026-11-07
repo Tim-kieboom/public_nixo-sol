@@ -7,7 +7,7 @@ hl.monitor({
     output   = mainMonitor,
     mode     = "preferred",
     position = "0x0",
-    scale    = "1.5",
+    scale    = "1.67",
 })
 
 hl.monitor({

@@ -152,6 +152,7 @@ in
       "x-scheme-handler/http" = [ "zen-beta.desktop" ];
       "x-scheme-handler/https" = [ "zen-beta.desktop" ];
       "x-scheme-handler/about" = [ "zen-beta.desktop" ];
+      "x-scheme-handler/terminal" = [ "kitty.desktop" ];
       "x-scheme-handler/unknown" = [ "zen-beta.desktop" ];
     };
   };
