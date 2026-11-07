@@ -37,16 +37,65 @@ require("monitors")
 ---------------------
 
 -- Set programs that you use
-local terminal      = "kitty"
-local fileManager   = "thunar"
-local menu          = "wofi --show drun --style ~/.local/state/theme/wofi.css"
-local editor        = "kitty trcode -r"
-local browser       = "zen-beta"
-local notes         = "obsidian"
-local music         = "spotify"
-local ai            = "claude-desktop"
-local copyHistory   = "~/.local/bin/cliphist-paste"
-local TTS           = "flatpak run net.mkiol.SpeechNote"
+local terminal             = "kitty"
+local fileManager          = "thunar"
+local menu                 = "wofi --show drun --style ~/.local/state/theme/wofi.css"
+local editor               = "kitty trcode -r"
+local browser              = "zen-beta"
+local notes                = "obsidian"
+local music                = "spotify"
+local ai                   = "claude-desktop"
+local copyHistory          = "~/.local/bin/cliphist-paste"
+local TTS                  = "flatpak run net.mkiol.SpeechNote"
+local game                 = "steam"
+
+local mainMod              = "SUPER" -- Sets "Windows" key as main modifier
+local keybinds             = {
+    terminal = mainMod .. " + Q",
+    editNixos = mainMod .. " + SHIFT + Q",
+
+    close = mainMod .. " + C",
+    shutdown = mainMod .. " + M",
+    files = mainMod .. " + E",
+    windowFloat = mainMod .. " + F",
+    menu = mainMod .. " + R",
+    notes = mainMod .. " + N",
+    browser = mainMod .. " + B",
+    editor = mainMod .. " + Z",
+    ai = mainMod .. " + A",
+    game = mainMod .. " + G",
+
+    music = {
+        openMusicApp = mainMod .. " + S",
+        prevTrack = mainMod .. " + minus",
+        nextTrack = mainMod .. " + equal",
+        play = mainMod .. " + bracketleft",
+        stop = mainMod .. " + bracketright",
+    },
+
+    screenshot = mainMod .. " + P",
+    screenshotRegion = mainMod .. " + SHIFT + P",
+
+    copyHistory = mainMod .. " + V",
+    TTS = mainMod .. " + T",
+
+    window = {
+        toggleSplit = mainMod .. " + J",
+
+        focusLeft = mainMod .. " + left",
+        focusRight = mainMod .. " + right",
+        focusUp = mainMod .. " + up",
+        focusDown = mainMod .. " + down",
+
+        moveLeft = mainMod .. " + SHIFT + left",
+        moveRight = mainMod .. " + SHIFT + right",
+        moveUp = mainMod .. " + SHIFT + up",
+        moveDown = mainMod .. " + SHIFT + down",
+
+        drag = mainMod .. " + mouse:272",
+        resize = mainMod .. " + mouse:273",
+    },
+}
 
 -------------------
 ---- AUTOSTART ----
@@ -57,9 +106,9 @@ local TTS           = "flatpak run net.mkiol.SpeechNote"
 -- Autostart necessary processes (like notifications daemons, status bars, etc.)
 -- Or execute your favorite apps at launch like this:
 
-local run_status_bar = "sol-shell"
-local run_hypr_agent = "systemctl --user start hyprpolkitagent"
-local start_file_portal = "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
+local run_status_bar       = "sol-shell"
+local run_hypr_agent       = "systemctl --user start hyprpolkitagent"
+local start_file_portal    = "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
 local add_cliphist_watcher = "wl-paste --watch cliphist store"
 
 hl.on("hyprland.start", function()
@@ -272,71 +321,64 @@ hl.device({
 ---- KEYBINDINGS ----
 ---------------------
 
-local mainMod = "SUPER" -- Sets "Windows" key as main modifier
+local shutdownCmd = "command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"
 
 -- Example binds, see https://wiki.hypr.land/Configuring/Basics/Binds/ for more
-hl.bind(mainMod .. " + Q", hl.dsp.exec_cmd(terminal))
-hl.bind(mainMod .. " + SHIFT + Q", hl.dsp.exec_cmd(terminal .. " trcode /etc/nixos"))
+hl.bind(keybinds.terminal, hl.dsp.exec_cmd(terminal))
+hl.bind(keybinds.editNixos, hl.dsp.exec_cmd(terminal .. " trcode /etc/nixos"))
 
-local closeWindowBind = hl.bind(mainMod .. " + C", hl.dsp.window.close())
--- closeWindowBind:set_enabled(false)
-hl.bind(mainMod .. " + M",
-    hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"))
-hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))
-hl.bind(mainMod .. " + F", hl.dsp.window.float({ action = "toggle" }))
-hl.bind(mainMod .. " + R", hl.dsp.exec_cmd(menu))
-hl.bind(mainMod .. " + N", hl.dsp.exec_cmd(notes))
-hl.bind(mainMod .. " + B", hl.dsp.exec_cmd(browser))
-hl.bind(mainMod .. " + Z", hl.dsp.exec_cmd(editor))
-hl.bind(mainMod .. " + A", hl.dsp.exec_cmd(ai))
-hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit")) -- dwindle only
+hl.bind(keybinds.close, hl.dsp.window.close())
+hl.bind(keybinds.shutdown, hl.dsp.exec_cmd(shutdownCmd))
+hl.bind(keybinds.files, hl.dsp.exec_cmd(fileManager))
+hl.bind(keybinds.windowFloat, hl.dsp.window.float({ action = "toggle" }))
+hl.bind(keybinds.menu, hl.dsp.exec_cmd(menu))
+hl.bind(keybinds.notes, hl.dsp.exec_cmd(notes))
+hl.bind(keybinds.browser, hl.dsp.exec_cmd(browser))
+hl.bind(keybinds.editor, hl.dsp.exec_cmd(editor))
+hl.bind(keybinds.ai, hl.dsp.exec_cmd(ai))
+hl.bind(keybinds.game, hl.dsp.exec_cmd(game))
 
 -- music
 local musicPlayer = "playerctl --player=" .. music
-hl.bind(mainMod .. " + S", hl.dsp.exec_cmd(music))
-hl.bind(mainMod .. " + minus", hl.dsp.exec_cmd(musicPlayer .. " previous"))
-hl.bind(mainMod .. " + equal", hl.dsp.exec_cmd(musicPlayer .. " next"))
-hl.bind(mainMod .. " + bracketleft", hl.dsp.exec_cmd(musicPlayer .. " play"))
-hl.bind(mainMod .. " + bracketright", hl.dsp.exec_cmd(musicPlayer .. " stop"))
+hl.bind(keybinds.music.openMusicApp, hl.dsp.exec_cmd(music))
+hl.bind(keybinds.music.prevTrack, hl.dsp.exec_cmd(musicPlayer .. " previous"))
+hl.bind(keybinds.music.nextTrack, hl.dsp.exec_cmd(musicPlayer .. " next"))
+hl.bind(keybinds.music.play, hl.dsp.exec_cmd(musicPlayer .. " play"))
+hl.bind(keybinds.music.stop, hl.dsp.exec_cmd(musicPlayer .. " stop"))
 
+-- tts
+hl.bind(keybinds.TTS, hl.dsp.exec_cmd(TTS))
 
 -- screenshot
 --  full screenshot
-hl.bind(mainMod .. " + P", hl.dsp.exec_cmd("hyprshot -m output"))
-hl.bind(mainMod .. " + SHIFT + P", hl.dsp.exec_cmd("hyprshot -m region"))
+hl.bind(keybinds.screenshot, hl.dsp.exec_cmd("hyprshot -m output"))
+hl.bind(keybinds.screenshotRegion, hl.dsp.exec_cmd("hyprshot -m region"))
 
 -- copy/paste
 --  copy history
-hl.bind(mainMod .. " + V", hl.dsp.exec_cmd(copyHistory))
+hl.bind(keybinds.copyHistory, hl.dsp.exec_cmd(copyHistory))
 
--- tts 
-hl.bind(mainMod .. " + T", hl.dsp.exec_cmd(TTS))
+-- windows
+hl.bind(keybinds.window.toggleSplit, hl.dsp.layout("togglesplit")) -- dwindle only
 
--- Move focus with mainMod + arrow keys
-hl.bind(mainMod .. " + left", hl.dsp.focus({ direction = "left" }))
-hl.bind(mainMod .. " + right", hl.dsp.focus({ direction = "right" }))
-hl.bind(mainMod .. " + up", hl.dsp.focus({ direction = "up" }))
-hl.bind(mainMod .. " + down", hl.dsp.focus({ direction = "down" }))
+--  Move focus with mainMod + arrow keys
+hl.bind(keybinds.window.focusLeft, hl.dsp.focus({ direction = "left" }))
+hl.bind(keybinds.window.focusRight, hl.dsp.focus({ direction = "right" }))
+hl.bind(keybinds.window.focusUp, hl.dsp.focus({ direction = "up" }))
+hl.bind(keybinds.window.focusDown, hl.dsp.focus({ direction = "down" }))
 
--- Move window with mainMod + shift + arrow keys
-hl.bind(mainMod .. " + SHIFT + left", hl.dsp.window.move({ direction = "left" }))
-hl.bind(mainMod .. " + SHIFT + right", hl.dsp.window.move({ direction = "right" }))
-hl.bind(mainMod .. " + SHIFT + up", hl.dsp.window.move({ direction = "up" }))
-hl.bind(mainMod .. " + SHIFT + down", hl.dsp.window.move({ direction = "down" }))
+--  Move window with mainMod + shift + arrow keys
+hl.bind(keybinds.window.moveLeft, hl.dsp.window.move({ direction = "left" }))
+hl.bind(keybinds.window.moveRight, hl.dsp.window.move({ direction = "right" }))
+hl.bind(keybinds.window.moveUp, hl.dsp.window.move({ direction = "up" }))
+hl.bind(keybinds.window.moveDown, hl.dsp.window.move({ direction = "down" }))
 
--- mouse: SUPER + left-drag moves, SUPER + right-drag resizes
-hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag(),   { mouse = true })
-hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
+--  mouse: SUPER + left-drag moves, SUPER + right-drag resizes
+hl.bind(keybinds.window.drag, hl.dsp.window.drag(), { mouse = true })
+hl.bind(keybinds.window.resize, hl.dsp.window.resize(), { mouse = true })
 
--- Resize with the keyboard (repeat while held)
-hl.bind(mainMod .. " + CTRL + left",  hl.dsp.window.resize({ x = -40, y = 0,   relative = true }), { repeating = true })
-hl.bind(mainMod .. " + CTRL + right", hl.dsp.window.resize({ x = 40,  y = 0,   relative = true }), { repeating = true })
-hl.bind(mainMod .. " + CTRL + up",    hl.dsp.window.resize({ x = 0,   y = -40, relative = true }), { repeating = true })
-hl.bind(mainMod .. " + CTRL + down",  hl.dsp.window.resize({ x = 0,   y = 40,  relative = true }), { repeating = true })
-
-
--- Switch workspaces with mainMod + [0-9]
--- Move active window to a workspace with mainMod + SHIFT + [0-9]
+--  Switch workspaces with mainMod + [0-9]
+--  Move active window to a workspace with mainMod + SHIFT + [0-9]
 for i = 1, 10 do
     local key = i % 10 -- 10 maps to key 0
     hl.bind(mainMod .. " + " .. key, hl.dsp.focus({ workspace = i }))
@@ -347,13 +389,9 @@ end
 -- hl.bind(mainMod .. " + S", hl.dsp.workspace.toggle_special("magic"))
 -- hl.bind(mainMod .. " + SHIFT + S", hl.dsp.window.move({ workspace = "special:magic" }))
 
--- Scroll through existing workspaces with mainMod + scroll
+--  Scroll through existing workspaces with mainMod + scroll
 hl.bind(mainMod .. " + mouse_down", hl.dsp.focus({ workspace = "e+1" }))
 hl.bind(mainMod .. " + mouse_up", hl.dsp.focus({ workspace = "e-1" }))
-
--- Move/resize windows with mainMod + LMB/RMB and dragging
-hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag(), { mouse = true })
-hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
 
 -- Laptop multimedia keys for volume and LCD brightness
 hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"),
@@ -383,14 +421,13 @@ hl.bind("XF86AudioPrev", hl.dsp.exec_cmd("playerctl previous"), { locked = true 
 
 -- Example window rules that are useful
 
-local suppressMaximizeRule = hl.window_rule({
+hl.window_rule({
     -- Ignore maximize requests from all apps. You'll probably like this.
     name           = "suppress-maximize-events",
     match          = { class = ".*" },
 
     suppress_event = "maximize",
 })
--- suppressMaximizeRule:set_enabled(false)
 
 hl.window_rule({
     -- Fix some dragging issues with XWayland

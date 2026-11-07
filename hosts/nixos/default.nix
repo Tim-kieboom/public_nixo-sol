@@ -1,5 +1,10 @@
 # Desktop machine: AMD CPU, NVIDIA GPU, dual boot with Windows.
-{ lib, vars, ... }:
+{
+  lib,
+  vars,
+  config,
+  ...
+}:
 
 {
   imports = [
@@ -11,7 +16,7 @@
     ./windows-mounts.nix
   ];
 
-# -- Boot -- 
+  # -- Boot --
   # max number of configs displayed in systemd-boot menu
   boot.loader.systemd-boot.configurationLimit = 10;
 
@@ -21,9 +26,9 @@
     enable = true;
     efiSupport = true;
     device = "nodev";
-    useOSProber = true;   # finds Windows
+    useOSProber = true; # finds Windows
   };
-  
+
   boot.loader.efi.canTouchEfiVariables = true;
 
   # dont require to relogin every reboot for stuff like claude-desktop

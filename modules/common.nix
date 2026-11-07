@@ -107,6 +107,8 @@
   environment.systemPackages = with pkgs; [
     # partition tool
     gparted
+    # gameing proton
+    protonup-qt
 
     # Code
     # language servers
