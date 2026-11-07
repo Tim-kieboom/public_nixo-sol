@@ -1,6 +1,10 @@
 -- Monitor layout of the "nixos" host (loaded by hyprland.lua).
 -- Find your outputs with `hyprctl monitors`.
 
+-- preferre gpu-a over gpu-b
+hl.env("AQ_DRM_DEVICES", "/dev/dri/gpu-a:/dev/dri/gpu-b")
+
+
 local mainMonitor = "HDMI-A-4"
 local secondMonitor = "HDMI-A-5"
 hl.monitor({
