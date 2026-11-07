@@ -32,6 +32,9 @@
 -- (from hosts/<name>/monitors.lua in the nixos repo)
 require("monitors")
 
+-- preferre gpu-a over gpu-b
+hl.env("AQ_DRM_DEVICES", "/dev/dri/gpu-a:/dev/dri/gpu-b")
+
 ---------------------
 ---- MY PROGRAMS ----
 ---------------------
