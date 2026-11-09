@@ -50,6 +50,8 @@ in
     marktext
     # disk usage viewer
     pkgs.kdePackages.filelight
+    # game fps
+    mangohud
     # free fusion
     # inputs.solidcraft.packages.${pkgs.system}.solidcraft
 
@@ -61,16 +63,6 @@ in
 
     # --Programming--
     zed-editor # ide
-
-    # C
-    gcc # c compiler/linker
-
-    # rust
-    cargo
-    lldb # debugger
-    # rustup                  # rust tools
-    cargo-nextest # rust better test extenstion
-    pkg-config # how crates find lib
 
     # --Hyperland--
     hyprsunset # Night light

@@ -9,9 +9,9 @@
 {
   imports = [
     ./hardware-configuration.nix
+    ../../modules/programming.nix
     ../../modules/nvidia.nix
     ../../modules/gaming.nix
-    ../../modules/dev-services.nix
     ../../modules/ai.nix
     ./windows-mounts.nix
   ];

@@ -212,11 +212,11 @@
         "nixpkgs": "nixpkgs_3"
       },
       "locked": {
-        "lastModified": 1792433401,
-        "narHash": "sha256-+mqfGg9eg8QMdVr+UzMgzJ0sfYruNKC9F+CQW/Ef+iY=",
+        "lastModified": 1794176247,
+        "narHash": "sha256-jctzVmJGznM/gNKAEAHIpb2Pwuw0B8aahg4ivsBv5Xw=",
         "owner": "Tim-kieboom",
         "repo": "sol-shell",
-        "rev": "e441278ba5d99b47ded602ae643dc2b6482c19ee",
+        "rev": "e6a1f4a91c07297d587d8b98c8094af242d049a7",
         "type": "github"
       },
       "original": {

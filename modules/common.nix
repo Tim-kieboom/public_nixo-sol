@@ -13,6 +13,14 @@
     inputs.sol-shell.nixosModules.greeter
   ];
 
+  # -virtual machine-
+  virtualisation.libvirtd.enable = true;
+  programs.virt-manager.enable = true;
+  virtualisation.libvirtd.qemu.verbatimConfig = ''
+    user = "timk"
+    group = "users"
+  '';
+
   # --Desktop--
   # -fileManager-
   programs.thunar = {
@@ -110,21 +118,6 @@
     # gameing proton
     protonup-qt
 
-    # Code
-    # language servers
-    vscode-langservers-extracted # html/css/json
-    typescript-language-server # ts
-    lua-language-server # lua
-    nil # nix
-
-    nixfmt # nix formatter
-    lld # linker
-    python3 # python
-
-    # version control
-    git
-    gh # github cli
-
     # ai
     opencode # ai agent coder tui
     inputs.llm-agents.packages.${pkgs.system}.claude-desktop # ai app claude desktop
@@ -137,22 +130,8 @@
     wl-clipboard # clipboard (used in cliphist for copy history)
     wtype # keyboard simulator (used for copy history)
     teams-for-linux # teams
-    inputs.terminal_code.packages.${pkgs.stdenv.hostPlatform.system}.default # trcode terminal ide
-
   ];
-
-  programs.nix-ld = {
-    enable = true;
-    libraries = with pkgs; [
-      stdenv.cc.cc.lib # libstdc++
-      zlib
-      openssl
-      curl
-      icu
-    ];
-  };
-
-  programs.yazi.enable = true;
+  
   # --Unordered--
 
   # optimize nix store
@@ -227,6 +206,7 @@
     extraGroups = [
       "networkmanager"
       "wheel"
+      "libvirtd" # for virtual machine
     ];
     home = "/home/${vars.username}";
   };

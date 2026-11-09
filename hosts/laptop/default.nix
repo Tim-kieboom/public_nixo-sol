@@ -7,11 +7,12 @@
 {
   imports = [
     ./hardware-configuration.nix
+    ../../modules/programming.nix
     ../../modules/nvidia.nix
     ./windows-mounts.nix
   ];
 
-# -- Boot -- 
+  # -- Boot --
   # max number of configs displayed in systemd-boot menu
   boot.loader.systemd-boot.configurationLimit = 10;
 
@@ -33,7 +34,7 @@
       }
     '';
   };
-  
+
   boot.loader.grub.efiInstallAsRemovable = true;
   boot.loader.efi.canTouchEfiVariables = false;
 
