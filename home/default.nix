@@ -122,11 +122,27 @@ in
     size = 24;
   };
 
+  # Bash scripts
+  # make ./bash/*.sh from source
+  home.file = {
+    ".local/bin/tmux-main.sh" = {
+      source = ./bash/tmux-main.sh;
+      executable = true;
+    };
+    ".local/bin/cliphist-paste.sh" = {
+      source = ./bash/cliphist-paste.sh;
+      executable = true;
+    };
+  };
+
   # Hyprland
   # make hyprland.lua from source
-  xdg.configFile."hypr/hyprland.lua".source = ./hypr/hyprland.lua;
-  # monitor layout is per machine (hosts/<name>/monitors.lua)
-  xdg.configFile."hypr/monitors.lua".source = ../hosts/${hostName}/monitors.lua;
+  xdg.configFile = {
+    "hypr/hyprland.lua".source = ./hypr/hyprland.lua;
+    # monitor layout is per machine (hosts/<name>/monitors.lua)
+    "hypr/monitors.lua".source = ../hosts/${hostName}/monitors.lua;
+  };
+
   services.hyprpolkitagent.enable = true;
   wayland.windowManager.hyprland = {
     enable = true;
@@ -163,6 +179,9 @@ in
       font_family = "Noto Sans";
     };
   };
+
+  # tmux terminal manager
+  programs.tmux.enable = true;
 
   # fastfetch
   programs.fastfetch = {

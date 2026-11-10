@@ -123,15 +123,14 @@
     inputs.llm-agents.packages.${pkgs.system}.claude-desktop # ai app claude desktop
 
     # hardware displayer
-    htop # task manager
-    btop # gpu displayer
+    btop # task manager
 
     # other apps
     wl-clipboard # clipboard (used in cliphist for copy history)
     wtype # keyboard simulator (used for copy history)
     teams-for-linux # teams
   ];
-  
+
   # --Unordered--
 
   # optimize nix store

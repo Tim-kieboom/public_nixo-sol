@@ -30,35 +30,41 @@
 
 -- monitors and workspace placement are per machine: ~/.config/hypr/monitors.lua
 -- (from hosts/<name>/monitors.lua in the nixos repo)
-require("monitors")
-
--- preferre gpu-a over gpu-b
-hl.env("AQ_DRM_DEVICES", "/dev/dri/gpu-a:/dev/dri/gpu-b")
+local ok, err = pcall(require, "monitors")
+if not ok then
+    hl.exec_cmd("notify-send 'Hyprland' 'monitors.lua failed: " .. tostring(err) .. "'")
+end
 
 ---------------------
 ---- MY PROGRAMS ----
 ---------------------
 
 -- Set programs that you use
-local terminal             = "kitty"
+local raw_terminal         = "kitty"
+local raw_editor           = "trcode"
+local terminal             = raw_terminal .. " ~/.local/bin/tmux-main.sh shell"
+local editor               = raw_terminal .. " ~/.local/bin/tmux-main.sh editor trcode -r"
+local editNixos            = raw_terminal .. " " .. raw_editor .. " /etc/nixos"
 local fileManager          = "thunar"
 local menu                 = "wofi --show drun --style ~/.local/state/theme/wofi.css"
-local editor               = "kitty trcode -r"
 local browser              = "zen-beta"
 local notes                = "obsidian"
 local music                = "spotify"
 local ai                   = "claude-desktop"
-local copyHistory          = "~/.local/bin/cliphist-paste"
+local copyHistory          = "~/.local/bin/cliphist-paste.sh"
 local TTS                  = "flatpak run net.mkiol.SpeechNote"
 local game                 = "steam"
+local lockscreen           = "sol-shell ipc call lock lock"
 
 local mainMod              = "SUPER" -- Sets "Windows" key as main modifier
 local keybinds             = {
+    shutdown = mainMod .. " + SHIFT + M",
+    lockscreen = mainMod .. " + SHIFT + L",
+
     terminal = mainMod .. " + Q",
     editNixos = mainMod .. " + SHIFT + Q",
 
     close = mainMod .. " + C",
-    shutdown = mainMod .. " + M",
     files = mainMod .. " + E",
     windowFloat = mainMod .. " + F",
     menu = mainMod .. " + R",
@@ -109,15 +115,20 @@ local keybinds             = {
 -- Autostart necessary processes (like notifications daemons, status bars, etc.)
 -- Or execute your favorite apps at launch like this:
 
+-- SHOULD BE FIRST
+local start_file_portal    = "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
+
 local run_status_bar       = "sol-shell"
 local run_hypr_agent       = "systemctl --user start hyprpolkitagent"
-local start_file_portal    = "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
-local add_cliphist_watcher = "wl-paste --watch cliphist store"
+local add_cliphist_image   = "wl-paste --type image --watch cliphist store"
+local add_cliphist_watcher = "wl-paste --type text --watch cliphist store"
 
 hl.on("hyprland.start", function()
+    hl.exec_cmd(start_file_portal)
+
     hl.exec_cmd(run_status_bar)
     hl.exec_cmd(run_hypr_agent)
-    hl.exec_cmd(start_file_portal)
+    hl.exec_cmd(add_cliphist_image)
     hl.exec_cmd(add_cliphist_watcher)
 end)
 
@@ -233,42 +244,10 @@ hl.animation({ leaf = "workspacesIn", enabled = true, speed = 1.21, bezier = "al
 hl.animation({ leaf = "workspacesOut", enabled = true, speed = 1.94, bezier = "almostLinear", style = "fade" })
 hl.animation({ leaf = "zoomFactor", enabled = true, speed = 7, bezier = "quick" })
 
--- Ref https://wiki.hypr.land/Configuring/Basics/Workspace-Rules/
--- "Smart gaps" / "No gaps when only"
--- uncomment all if you wish to use that.
--- hl.workspace_rule({ workspace = "w[tv1]", gaps_out = 0, gaps_in = 0 })
--- hl.workspace_rule({ workspace = "f[1]",   gaps_out = 0, gaps_in = 0 })
--- hl.window_rule({
---     name  = "no-gaps-wtv1",
---     match = { float = false, workspace = "w[tv1]" },
---     border_size = 0,
---     rounding    = 0,
--- })
--- hl.window_rule({
---     name  = "no-gaps-f1",
---     match = { float = false, workspace = "f[1]" },
---     border_size = 0,
---     rounding    = 0,
--- })
-
 -- See https://wiki.hypr.land/Configuring/Layouts/Dwindle-Layout/ for more
 hl.config({
     dwindle = {
         preserve_split = true, -- You probably want this
-    },
-})
-
--- See https://wiki.hypr.land/Configuring/Layouts/Master-Layout/ for more
-hl.config({
-    master = {
-        new_status = "master",
-    },
-})
-
--- See https://wiki.hypr.land/Configuring/Layouts/Scrolling-Layout/ for more
-hl.config({
-    scrolling = {
-        fullscreen_on_one_column = true,
     },
 })
 
@@ -312,13 +291,6 @@ hl.gesture({
     action = "workspace"
 })
 
--- Example per-device config
--- See https://wiki.hypr.land/Configuring/Advanced-and-Cool/Devices/ for more
-hl.device({
-    name        = "epic-mouse-v1",
-    sensitivity = -0.5,
-})
-
 
 ---------------------
 ---- KEYBINDINGS ----
@@ -327,11 +299,13 @@ hl.device({
 local shutdownCmd = "command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"
 
 -- Example binds, see https://wiki.hypr.land/Configuring/Basics/Binds/ for more
+hl.bind(keybinds.shutdown, hl.dsp.exec_cmd(shutdownCmd))
+hl.bind(keybinds.lockscreen, hl.dsp.exec_cmd(lockscreen))
+
 hl.bind(keybinds.terminal, hl.dsp.exec_cmd(terminal))
-hl.bind(keybinds.editNixos, hl.dsp.exec_cmd(terminal .. " trcode /etc/nixos"))
+hl.bind(keybinds.editNixos, hl.dsp.exec_cmd(editNixos))
 
 hl.bind(keybinds.close, hl.dsp.window.close())
-hl.bind(keybinds.shutdown, hl.dsp.exec_cmd(shutdownCmd))
 hl.bind(keybinds.files, hl.dsp.exec_cmd(fileManager))
 hl.bind(keybinds.windowFloat, hl.dsp.window.float({ action = "toggle" }))
 hl.bind(keybinds.menu, hl.dsp.exec_cmd(menu))
@@ -402,9 +376,9 @@ hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("wpctl set-volume -l 1 @DEFAULT_
 hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"),
     { locked = true, repeating = true })
 hl.bind("XF86AudioMute", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"),
-    { locked = true, repeating = true })
+    { locked = true, repeating = false })
 hl.bind("XF86AudioMicMute", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"),
-    { locked = true, repeating = true })
+    { locked = true, repeating = false })
 hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd("brightnessctl -e4 -n2 set 5%+"), { locked = true, repeating = true })
 hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("brightnessctl -e4 -n2 set 5%-"), { locked = true, repeating = true })
 
