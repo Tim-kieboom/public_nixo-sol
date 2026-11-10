@@ -40,11 +40,10 @@ end
 ---------------------
 
 -- Set programs that you use
-local raw_terminal         = "kitty"
 local raw_editor           = "trcode"
-local terminal             = raw_terminal .. " ~/.local/bin/tmux-main.sh shell"
-local editor               = raw_terminal .. " ~/.local/bin/tmux-main.sh editor trcode -r"
-local editNixos            = raw_terminal .. " " .. raw_editor .. " /etc/nixos"
+local terminal             = "kitty"
+local editor               = terminal .. " trcode -r"
+local editNixos            = terminal .. " " .. raw_editor .. " /etc/nixos"
 local fileManager          = "thunar"
 local menu                 = "wofi --show drun --style ~/.local/state/theme/wofi.css"
 local browser              = "zen-beta"

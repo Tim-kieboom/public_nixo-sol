@@ -12,9 +12,11 @@
     vscode-langservers-extracted # html/css/json
     typescript-language-server # ts
     lua-language-server # lua
+    ccls # c
     nil # nix
 
     # C
+    cmake
     gcc # c compiler/linker
 
     # rust

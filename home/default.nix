@@ -52,6 +52,8 @@ in
     pkgs.kdePackages.filelight
     # game fps
     mangohud
+    # calculator
+    gnome-calculator
     # free fusion
     # inputs.solidcraft.packages.${pkgs.system}.solidcraft
 
