@@ -20,6 +20,7 @@
     # rust
     cargo
     rustfmt
+    rustc
     rust-analyzer
     lldb # debugger
     cargo-nextest # rust better test extenstion
