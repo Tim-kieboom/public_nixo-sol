@@ -420,6 +420,15 @@ hl.window_rule({
     no_focus = true,
 })
 
+-- Steam games (Proton/XWayland, class steam_app_<id>): never float, always tile/fullscreen
+hl.window_rule({
+    name       = "steam-games-tile",
+    match      = { class = "^steam_app_.*$" },
+
+    tile       = true,
+    fullscreen = true,
+})
+
 -- Layer rules also return a handle.
 -- local overlayLayerRule = hl.layer_rule({
 --     name  = "no-anim-overlay",

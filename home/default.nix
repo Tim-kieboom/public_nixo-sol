@@ -74,6 +74,18 @@ in
     pavucontrol # audio of status bar
   ];
 
+  xdg.desktopEntries.steam = {
+    name = "Steam";
+    # force steam to launch with prefered GPU
+    exec = "env -u DRI_PRIME steam %U";
+    icon = "steam";
+    categories = [ "Game" ];
+    mimeType = [
+      "x-scheme-handler/steam"
+      "x-scheme-handler/steamlink"
+    ];
+  };
+
   # screen recorder
   programs.obs-studio.enable = true;
 
