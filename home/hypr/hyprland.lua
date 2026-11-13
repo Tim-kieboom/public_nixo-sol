@@ -46,12 +46,12 @@ local editor               = terminal .. " trcode -r"
 local editNixos            = terminal .. " " .. raw_editor .. " /etc/nixos"
 local fileManager          = "thunar"
 local menu                 = "wofi --show drun --style ~/.local/state/theme/wofi.css"
-local browser              = "zen-beta"
+local browser              = "brave"
 local notes                = "obsidian"
 local music                = "spotify"
 local ai                   = "claude-desktop"
 local copyHistory          = "~/.local/bin/cliphist-paste.sh"
-local TTS                  = "flatpak run net.mkiol.SpeechNote"
+local tts                  = "flatpak run net.mkiol.SpeechNote"
 local game                 = "steam"
 local lockscreen           = "sol-shell ipc call lock lock"
 
@@ -323,7 +323,7 @@ hl.bind(keybinds.music.play, hl.dsp.exec_cmd(musicPlayer .. " play"))
 hl.bind(keybinds.music.stop, hl.dsp.exec_cmd(musicPlayer .. " stop"))
 
 -- tts
-hl.bind(keybinds.TTS, hl.dsp.exec_cmd(TTS))
+hl.bind(keybinds.TTS, hl.dsp.exec_cmd(tts))
 
 -- screenshot
 --  full screenshot
