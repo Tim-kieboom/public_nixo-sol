@@ -57,6 +57,9 @@ in
     # free fusion
     # inputs.solidcraft.packages.${pkgs.system}.solidcraft
 
+    # browser
+    brave
+
     # --Games--
     # minecraft
     (prismlauncher.override {
