@@ -123,6 +123,7 @@
 
     # hardware displayer
     btop # task manager
+    nvtopPackages.full
 
     # other apps
     wl-clipboard # clipboard (used in cliphist for copy history)
@@ -139,7 +140,7 @@
   nix.gc = {
     automatic = true;
     dates = "weekly";
-    options = "--delete-older-than 30d";
+    options = "--delete-older-than 7d";
   };
 
   # enable flakes
