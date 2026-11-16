@@ -11,7 +11,6 @@ in
 {
   imports = [
     inputs.sol-shell.nixosModules.default
-    inputs.zen-browser.homeModules.default
     inputs.spicetify-nix.homeManagerModules.default
   ];
 
@@ -46,8 +45,6 @@ in
     libreoffice
     # notes
     notepad-next
-    # md viewer/editor
-    marktext
     # disk usage viewer
     pkgs.kdePackages.filelight
     # game fps
@@ -90,9 +87,6 @@ in
     ];
   };
 
-  # screen recorder
-  programs.obs-studio.enable = true;
-
   programs.direnv = {
     enable = true;
     nix-direnv.enable = true;
@@ -124,12 +118,6 @@ in
 
   # fireox extra browser
   programs.firefox.enable = true;
-
-  # browser
-  programs.zen-browser = {
-    enable = true;
-    setAsDefaultBrowser = true;
-  };
 
   # cursor
   home.pointerCursor = {
@@ -174,12 +162,12 @@ in
     enable = true;
     defaultApplications = {
       "inode/directory" = [ "thunar.desktop" ];
-      "text/html" = [ "zen-beta.desktop" ];
-      "x-scheme-handler/http" = [ "zen-beta.desktop" ];
-      "x-scheme-handler/https" = [ "zen-beta.desktop" ];
-      "x-scheme-handler/about" = [ "zen-beta.desktop" ];
+      "text/html" = [ "brave.desktop" ];
+      "x-scheme-handler/http" = [ "brave.desktop" ];
+      "x-scheme-handler/https" = [ "brave.desktop" ];
+      "x-scheme-handler/about" = [ "brave.desktop" ];
       "x-scheme-handler/terminal" = [ "kitty.desktop" ];
-      "x-scheme-handler/unknown" = [ "zen-beta.desktop" ];
+      "x-scheme-handler/unknown" = [ "brave.desktop" ];
     };
   };
 

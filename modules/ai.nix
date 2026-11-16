@@ -2,10 +2,4 @@
 { pkgs, ... }:
 
 {
-  services.ollama = {
-    enable = true;
-    package = pkgs.ollama-cuda;
-    # downloads the model (~18 GB) when the service starts
-    loadModels = [ ];
-  };
 }
