@@ -56,7 +56,8 @@ in
     gnome-calculator
     # free fusion
     # inputs.solidcraft.packages.${pkgs.system}.solidcraft
-
+    # task manager
+    inputs.soltop.packages.${pkgs.stdenv.hostPlatform.system}.default
     # browser
     brave
 

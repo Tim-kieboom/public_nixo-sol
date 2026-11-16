@@ -13,6 +13,9 @@
     # terminal ide
     terminal_code.url = "github:Tim-kieboom/TerminalCode";
 
+    # task manager
+    soltop.url = "github:Tim-kieboom/Soltop";
+
     # statusbar/wallpaper
     sol-shell.url = "github:Tim-kieboom/sol-shell";
 
