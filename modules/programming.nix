@@ -15,6 +15,9 @@
     ccls # c
     nil # nix
 
+    # bend lang
+    inputs.bend.packages.${pkgs.system}.default
+
     # C
     cmake
     gcc # c compiler/linker

@@ -4,6 +4,9 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
 
+    # bend programming language
+    bend.url = "github:bendlang/bend";
+
     # free fusion
     # solidcraft.url = "github:bherbruck/solidcraft";
 
