@@ -18,6 +18,11 @@
     # bend lang
     inputs.bend.packages.${pkgs.system}.default
 
+    # ocaml
+    ocaml
+    ocamlPackages.ocaml-lsp # ocamllsp binary
+    dune # build tool
+
     # C
     cmake
     gcc # c compiler/linker
