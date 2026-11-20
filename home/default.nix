@@ -57,6 +57,8 @@ in
     inputs.soltop.packages.${pkgs.stdenv.hostPlatform.system}.default
     # browser
     brave
+    # document viewer (ebook reader)
+    kdePackages.okular
 
     # --Games--
     # minecraft
