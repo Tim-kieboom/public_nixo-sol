@@ -129,6 +129,7 @@
     wl-clipboard # clipboard (used in cliphist for copy history)
     wtype # keyboard simulator (used for copy history)
     teams-for-linux # teams
+    pkgs.xfce4-exo # gives exo-open cmd to be able to open terminal in thunar
   ];
 
   # --Unordered--
