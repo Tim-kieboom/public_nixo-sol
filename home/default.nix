@@ -74,7 +74,7 @@ in
     hyprpicker # colorPicker
     hyprshot # for making screenshots
     wofi # app launcher
-    pavucontrol # audio of status bar
+    pavucontrol # audio
   ];
 
   xdg.desktopEntries.steam = {
@@ -133,10 +133,6 @@ in
   # Bash scripts
   # make ./bash/*.sh from source
   home.file = {
-    ".local/bin/tmux-main.sh" = {
-      source = ./bash/tmux-main.sh;
-      executable = true;
-    };
     ".local/bin/cliphist-paste.sh" = {
       source = ./bash/cliphist-paste.sh;
       executable = true;
@@ -163,13 +159,13 @@ in
   xdg.mimeApps = {
     enable = true;
     defaultApplications = {
-      "inode/directory" = [ "thunar.desktop" ];
       "text/html" = [ "brave.desktop" ];
+      "inode/directory" = [ "thunar.desktop" ];
       "x-scheme-handler/http" = [ "brave.desktop" ];
       "x-scheme-handler/https" = [ "brave.desktop" ];
       "x-scheme-handler/about" = [ "brave.desktop" ];
-      "x-scheme-handler/terminal" = [ "kitty.desktop" ];
       "x-scheme-handler/unknown" = [ "brave.desktop" ];
+      "x-scheme-handler/terminal" = [ "kitty.desktop" ];
     };
   };
 
@@ -177,14 +173,14 @@ in
   programs.kitty = {
     enable = true;
     settings = {
-      background_opacity = "0.8";
+      cursor = "#d1c88f";
       background_blur = 2;
-      dynamic_background_opacity = "yes";
-      text_composition_strategy = "platform";
       background = "#120e18";
       foreground = "#e8ebf7";
-      cursor = "#d1c88f";
       font_family = "Noto Sans";
+      background_opacity = "0.8";
+      dynamic_background_opacity = "yes";
+      text_composition_strategy = "platform";
     };
   };
 

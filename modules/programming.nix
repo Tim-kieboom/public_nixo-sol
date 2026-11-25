@@ -18,6 +18,8 @@
     # C
     cmake
     gcc # c compiler/linker
+    gpp # c++ copmiler/linker
+    clang
 
     # rust
     cargo

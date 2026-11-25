@@ -57,7 +57,7 @@ local lockscreen           = "sol-shell ipc call lock lock"
 
 local mainMod              = "SUPER" -- Sets "Windows" key as main modifier
 local keybinds             = {
-    shutdown = mainMod .. " + SHIFT + M",
+    logout = mainMod .. " + SHIFT + M",
     lockscreen = mainMod .. " + SHIFT + L",
 
     terminal = mainMod .. " + Q",
@@ -122,7 +122,14 @@ local run_hypr_agent       = "systemctl --user start hyprpolkitagent"
 local add_cliphist_image   = "wl-paste --type image --watch cliphist store"
 local add_cliphist_watcher = "wl-paste --type text --watch cliphist store"
 
+local headphone_MAC        = "00:0A:45:4C:4E:8D"
+local turn_bluetooth_on    = "bluetoothctl power on"
+local trust_headphone      = "bluetoothctl trust" .. headphone_MAC
+local connect_headphone    = "bluetoothctl connect" .. headphone_MAC
+
 hl.on("hyprland.start", function()
+    hl.exec_cmd(
+        "bluetoothctl power on && sleep 3 && bluetoothctl trust 00:0A:45:4C:4E:8D && bluetoothctl connect 00:0A:45:4C:4E:8D")
     hl.exec_cmd(start_file_portal)
 
     hl.exec_cmd(run_status_bar)
@@ -295,10 +302,10 @@ hl.gesture({
 ---- KEYBINDINGS ----
 ---------------------
 
-local shutdownCmd = "command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"
+local logoutCmd = "command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"
 
 -- Example binds, see https://wiki.hypr.land/Configuring/Basics/Binds/ for more
-hl.bind(keybinds.shutdown, hl.dsp.exec_cmd(shutdownCmd))
+hl.bind(keybinds.logout, hl.dsp.exec_cmd(logoutCmd))
 hl.bind(keybinds.lockscreen, hl.dsp.exec_cmd(lockscreen))
 
 hl.bind(keybinds.terminal, hl.dsp.exec_cmd(terminal))
