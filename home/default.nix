@@ -74,7 +74,7 @@ in
     hyprpicker # colorPicker
     hyprshot # for making screenshots
     wofi # app launcher
-    pavucontrol # audio
+    pwvucontrol # audio
   ];
 
   xdg.desktopEntries.steam = {
