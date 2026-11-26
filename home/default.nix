@@ -70,6 +70,7 @@ in
     zed-editor # ide
 
     # --Hyperland--
+    hypridle
     hyprsunset # Night light
     hyprpicker # colorPicker
     hyprshot # for making screenshots

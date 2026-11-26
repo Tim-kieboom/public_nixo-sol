@@ -10,6 +10,7 @@
     # Code
     # language servers
     vscode-langservers-extracted # html/css/json
+    kdePackages.qtdeclarative # qml
     typescript-language-server # ts
     lua-language-server # lua
     ccls # c
