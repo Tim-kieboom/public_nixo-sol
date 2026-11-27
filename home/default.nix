@@ -78,6 +78,11 @@ in
     pwvucontrol # audio
   ];
 
+  programs.vscode = {
+    enable = true;
+    package = pkgs.vscodium;
+  };
+
   xdg.desktopEntries.steam = {
     name = "Steam";
     # force steam to launch with prefered GPU
