@@ -24,24 +24,26 @@ local function new_keybind(key, addKey)
 end
 
 -- Set programs that you use
-local raw_editor  = "trcode"
-local terminal    = "kitty"
-local editor      = terminal .. " trcode -r"
-local editNixos   = terminal .. " " .. raw_editor .. " /etc/nixos"
-local fileManager = "thunar"
-local menu        = "wofi --show drun --style ~/.local/state/theme/wofi.css"
-local browser     = "brave"
-local notes       = "obsidian"
-local music       = "spotify"
-local ai          = "claude-desktop"
-local copyHistory = "~/.local/bin/cliphist-paste.sh"
-local tts         = "flatpak run net.mkiol.SpeechNote"
-local game        = "steam"
-local lockscreen  = "sol-shell ipc call lock lock"
+local raw_editor    = "trcode"
+local terminal      = "kitty"
+local editor        = terminal .. " trcode -r"
+local editNixos     = terminal .. " " .. raw_editor .. " /etc/nixos"
+local fileManager   = "thunar"
+local menu          = "wofi --show drun --style ~/.local/state/theme/wofi.css"
+local browser       = "brave"
+local notes         = "obsidian"
+local music         = "spotify"
+local ai            = "claude-desktop"
+local copyHistory   = "~/.local/bin/cliphist-paste.sh"
+local tts           = "flatpak run net.mkiol.SpeechNote"
+local game          = "steam"
+local lockscreen    = "sol-shell ipc call lock lock"
+local pickWallPaper = "sol-shell ipc call wallpaper pick"
 
-local keybinds    = {
+local keybinds      = {
     logout = new_keybind("M", "SHIFT"),
     lockscreen = new_keybind("L", "SHIFT"),
+    pickWallPaper = new_keybind("W"),
 
     terminal = new_keybind("Q"),
     editNixos = new_keybind("Q", "SHIFT"),
@@ -305,6 +307,7 @@ do
         -- ─── System ────────────────────────────────────────────────────────────────
         { keybinds.logout,             hl.dsp.exec_cmd(logoutCmd) },
         { keybinds.lockscreen,         hl.dsp.exec_cmd(lockscreen) },
+        { keybinds.pickWallPaper,      hl.dsp.exec_cmd(pickWallPaper) },
 
         -- ─── Apps ──────────────────────────────────────────────────────────────────
         { keybinds.terminal,           hl.dsp.exec_cmd(terminal) },
