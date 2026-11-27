@@ -38,7 +38,7 @@ local copyHistory   = "~/.local/bin/cliphist-paste.sh"
 local tts           = "flatpak run net.mkiol.SpeechNote"
 local game          = "steam"
 local lockscreen    = "sol-shell ipc call lock lock"
-local pickWallPaper = "sol-shell ipc call wallpaper pick"
+local pickWallPaper = "sol-shell ipc call wallpaper pickWorkspace"
 
 local keybinds      = {
     logout = new_keybind("M", "SHIFT"),

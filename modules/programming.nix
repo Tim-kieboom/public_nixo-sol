@@ -9,6 +9,15 @@
   environment.systemPackages = with pkgs; [
     # Code
     # language servers
+    # python: the interpreter and pylsp, with the plugins that make it report errors
+    (python3.withPackages (
+      ps: with ps; [
+        python-lsp-server
+        pyflakes
+        pycodestyle
+        mccabe
+      ]
+    ))
     vscode-langservers-extracted # html/css/json
     kdePackages.qtdeclarative # qml
     typescript-language-server # ts
