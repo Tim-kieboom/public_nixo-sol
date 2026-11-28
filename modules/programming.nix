@@ -13,7 +13,10 @@
     (python3.withPackages (
       ps: with ps; [
         python-lsp-server
-        ruff
+        pyflakes
+        pycodestyle
+        mccabe
+        black
       ]
     ))
     vscode-langservers-extracted # html/css/json
