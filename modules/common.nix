@@ -122,6 +122,7 @@
     inputs.llm-agents.packages.${pkgs.system}.claude-desktop # ai app claude desktop
 
     # hardware displayer
+    htop
     nvtopPackages.full
 
     # other apps
